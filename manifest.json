@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "כיוון כתיבת עברית ב-ChatGPT",
+  "version": "1.1",
+  "author" :"Snir Elgabsi",
+  "description": "הוספת תפריט קטן לשינוי כיוון כתיבה ב-ChatGPT",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chat.openai.com/*","https://chatgpt.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "permissions": [],
+  "host_permissions": ["https://chat.openai.com/*"]
+}
