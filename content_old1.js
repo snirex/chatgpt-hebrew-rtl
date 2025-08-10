@@ -1,5 +1,4 @@
-
-      javascript:(function(){
+javascript:(function(){
 let textareaDirection='rtl';
 
 function toggleDirection(){
@@ -8,6 +7,18 @@ function toggleDirection(){
   if(textarea){textarea.style.direction=textareaDirection;}
   const img=document.querySelector('#direction-toggle-button img');
   if(img){img.style.transform=textareaDirection==='ltr'?'scaleX(-1)':'scaleX(1)';}
+
+  // עדכון מיקום btnGroup לפי הכיוון החדש
+  const btnGroup=document.querySelector('#custom-btn-group');
+  if(btnGroup){
+    if(textareaDirection === 'rtl'){
+      btnGroup.style.right = 'auto';
+      btnGroup.style.left = '95px';
+    } else {
+      btnGroup.style.left = 'auto';
+      btnGroup.style.right = '95px';
+    }
+  }
 }
 
 function toggleMarkdownDirection(){
@@ -98,9 +109,24 @@ function createDirectionButton(){
   if(!btnGroup){
     btnGroup=document.createElement('div');
     btnGroup.id='custom-btn-group';
-    btnGroup.style.cssText='position:absolute;bottom:13px;right:95px;display:flex;gap:10px;z-index:9999;';
+    btnGroup.style.cssText=`
+      position:absolute;
+      bottom:13px;
+      display:flex;
+      gap:10px;
+      z-index:9999;
+    `;
     buttonContainer.style.position='relative';
     buttonContainer.appendChild(btnGroup);
+  }
+
+  // עדכון המיקום לפי כיוון הטקסט
+  if(textareaDirection === 'rtl'){
+    btnGroup.style.right = 'auto';
+    btnGroup.style.left = '95px';
+  } else {
+    btnGroup.style.left = 'auto';
+    btnGroup.style.right = '95px';
   }
 
   function makeButton(id,title,imgSrc,imgAlt,clickHandler){
@@ -128,7 +154,6 @@ function createDirectionButton(){
     toggleDirection
   );
   dirBtn.querySelector('img').style.transform=textareaDirection==="ltr"?"scaleX(-1)":"scaleX(1)";
-  
 
   const mdBtn=makeButton(
     'markdown-toggle-button',
@@ -137,7 +162,6 @@ function createDirectionButton(){
     'כיוון תשובות',
     toggleMarkdownDirection
   );
-  
 
   const qBtn=document.createElement('button');
   qBtn.id='q-style-toggle-button';
@@ -146,14 +170,17 @@ function createDirectionButton(){
   qBtn.style.cssText=dirBtn.style.cssText;
   qBtn.onclick=(e)=>{e.preventDefault();toggleWhitespaceStyle();toggleQButtonGlow();};
   addTooltipEvents(qBtn);
+
   btnGroup.appendChild(qBtn);
   btnGroup.appendChild(mdBtn);
   btnGroup.appendChild(dirBtn);
-  
 }
 
 document.addEventListener("keydown",e=>{
-  if(e.ctrlKey&&e.shiftKey&&!e.altKey){e.preventDefault();toggleDirection();}
+  if(e.ctrlKey&&e.shiftKey&&!e.altKey){
+    e.preventDefault();
+    toggleDirection();
+  }
 });
 
 const observer=new MutationObserver(()=>{createDirectionButton();});
