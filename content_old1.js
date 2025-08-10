@@ -1,24 +1,24 @@
 javascript:(function(){
 let textareaDirection='rtl';
 
+function updateButtonPosition(){
+  const btnGroup=document.querySelector('#custom-btn-group');
+  if(!btnGroup)return;
+  btnGroup.style.transition='transform 0.3s ease';
+  if(textareaDirection==='rtl'){
+    btnGroup.style.transform='calc(100% - 240px)'; // לצד שמאל
+  }else{
+    btnGroup.style.transform='95px'; // לצד ימין
+  }
+}
+
 function toggleDirection(){
   textareaDirection=textareaDirection==='rtl'?'ltr':'rtl';
   const textarea=document.querySelector('#prompt-textarea');
   if(textarea){textarea.style.direction=textareaDirection;}
   const img=document.querySelector('#direction-toggle-button img');
   if(img){img.style.transform=textareaDirection==='ltr'?'scaleX(-1)':'scaleX(1)';}
-
-  // עדכון מיקום btnGroup לפי הכיוון החדש
-  const btnGroup=document.querySelector('#custom-btn-group');
-  if(btnGroup){
-    if(textareaDirection === 'rtl'){
-      btnGroup.style.right = 'auto';
-      btnGroup.style.left = '95px';
-    } else {
-      btnGroup.style.left = 'auto';
-      btnGroup.style.right = '95px';
-    }
-  }
+  updateButtonPosition();
 }
 
 function toggleMarkdownDirection(){
@@ -102,31 +102,16 @@ function createDirectionButton(){
   if(document.querySelector('#direction-toggle-button'))return;
 
   const textarea=document.querySelector('#prompt-textarea');
-  const buttonContainer=textarea?.closest('form')?.querySelector('div.flex > div.flex');
-  if(!textarea||!buttonContainer)return;
+  const upperContainer=textarea?.closest('form')?.parentElement; // עוד DIV למעלה
+  if(!textarea||!upperContainer)return;
 
   let btnGroup=document.querySelector('#custom-btn-group');
   if(!btnGroup){
     btnGroup=document.createElement('div');
     btnGroup.id='custom-btn-group';
-    btnGroup.style.cssText=`
-      position:absolute;
-      bottom:13px;
-      display:flex;
-      gap:10px;
-      z-index:9999;
-    `;
-    buttonContainer.style.position='relative';
-    buttonContainer.appendChild(btnGroup);
-  }
-
-  // עדכון המיקום לפי כיוון הטקסט
-  if(textareaDirection === 'rtl'){
-    btnGroup.style.right = 'auto';
-    btnGroup.style.left = '95px';
-  } else {
-    btnGroup.style.left = 'auto';
-    btnGroup.style.right = '95px';
+    btnGroup.style.cssText='position:absolute;bottom:45px;right:95px;display:flex;gap:10px;z-index:9999;';
+    upperContainer.style.position='relative';
+    upperContainer.appendChild(btnGroup);
   }
 
   function makeButton(id,title,imgSrc,imgAlt,clickHandler){
@@ -170,17 +155,15 @@ function createDirectionButton(){
   qBtn.style.cssText=dirBtn.style.cssText;
   qBtn.onclick=(e)=>{e.preventDefault();toggleWhitespaceStyle();toggleQButtonGlow();};
   addTooltipEvents(qBtn);
-
   btnGroup.appendChild(qBtn);
   btnGroup.appendChild(mdBtn);
   btnGroup.appendChild(dirBtn);
+
+  updateButtonPosition();
 }
 
 document.addEventListener("keydown",e=>{
-  if(e.ctrlKey&&e.shiftKey&&!e.altKey){
-    e.preventDefault();
-    toggleDirection();
-  }
+  if(e.ctrlKey&&e.shiftKey&&!e.altKey){e.preventDefault();toggleDirection();}
 });
 
 const observer=new MutationObserver(()=>{createDirectionButton();});
