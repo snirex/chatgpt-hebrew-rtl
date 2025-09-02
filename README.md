@@ -1,10 +1,28 @@
-# chatgpt-hebrew-rtl
-Add buttons to ChatGPT question area in order to toggle the question textbox or the answers area right-to-left
-הוספת תפריט קטן לשינוי כיוון כתיבה ב-ChatGPT
+⏺ הוספת כפתור ליד תיבת השאלה של ChatGPT  לשינוי כיוון כתיבת השאלה - ימין או שמאל
+⏺ הוספת כפתור ליד תיבת השאלה של ChatGPT  לשינוי כיוון הכתיבה של התשובה - ימין או שמאל
 
-נוסיף כפתורים בתיבת השאלה של ChatGPT,
-איתם אפשר לשנות את
-* כיוון כתיבת השאלה ב-ChatGPT לצד ימין או שמאל על-ידי לחצן או לחיצת Ctrl+Shift
-* כיוון קריאת התשובה ימין או שמאל
-* להדגיש תיבות של שאלות שכבר נשאלו
+ChatGPT הוא כלי אדיר, אבל למי שכותב בעברית יש בעיה אחת מעצבנת: הטקסט לא מיושר נכון.
+✨ מה תקבל?
+✅ כותבים בעברית בצורה נוחה מימין לשמאל
+✅ חוויית שימוש חלקה וידידותית
+✅ מותקן תוך שניות – עובד אוטומטית באתר של ChatGPT
+✅ חינמי וללא פרסומות
 
+כך סוף סוף אפשר להתמקד ביצירתיות ובשאלות ל-ChatGPT, בלי להילחם עם הכיוון של הכתב.
+⚡ נסה עכשיו בלחיצה אחת ותראה את ההבדל!
+---
+Hebrew Text Direction for ChatGPT
+
+Write in Hebrew naturally – aligned from right to left – directly in ChatGPT!
+
+Tired of Hebrew text appearing misaligned or left-to-right in ChatGPT?
+This extension fixes it instantly, making Hebrew writing clean, natural, and easy.
+
+✨ Features:
+
+✅ Right-to-left alignment in ChatGPT input fields
+✅ Full Hebrew support without glitches
+✅ Quick installation & automatic operation
+✅ 100% free – no ads, no unnecessary permissions
+
+⚡ Install now and enjoy a smoother Hebrew experience in ChatGPT!
